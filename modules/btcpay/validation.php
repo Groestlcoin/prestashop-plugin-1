@@ -14,6 +14,14 @@ $cart     = $context->cart;
 
 $btcpay   = new btcpay();
 
+// update missing kernel object
+global $kernel;
+if(!$kernel){
+        require_once _PS_ROOT_DIR_.'/app/AppKernel.php';
+        $kernel = new \AppKernel('prod', false);
+        $kernel->boot();
+}
+
 if ($cart->id_customer == 0 OR $cart->id_address_delivery == 0 OR $cart->id_address_invoice == 0 OR !$btcpay->active) {
     Tools::redirect('index.php?controller=order&step=1');
 }

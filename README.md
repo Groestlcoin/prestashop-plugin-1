@@ -1,20 +1,20 @@
-# Prestashop Plugin for BTCPay server, an opensource Payment processor
+# Prestashop Plugin for GRSPay server, an opensource Payment processor
 
 Warning this is an Beta version
 Use it at your own risk
 
 ## Description
 
-A bitcoin payment plugin for PrestaShop using BTCPay server.
-BTCPay Server is a free and open source server for merchants wanting to accept Bitcoin for their business.
+A groestlcoin payment plugin for PrestaShop using GRSPay server.
+GRSPay Server is a free and open source server for merchants wanting to accept Groestlcoin for their business.
 The API is compatible with Bitpay service to allow seamless migration.
 
-BTCPay is design to be easy to deploy on container hosting platform like Azure.
+GRSPay is design to be easy to deploy on container hosting platform like Azure.
 and if you want, some companies provide hosting services.
 
 ## Quick Start Guide
 
-To get up and running with our plugin quickly, see the GUIDE here: https://github.com/btcpayserver/prestashop-plugin/blob/master/GUIDE.md
+To get up and running with our plugin quickly, see the GUIDE here: https://github.com/Groestlcoin/prestashop-plugin-1/blob/master/GUIDE.md
 
 
 # Internals
@@ -32,9 +32,9 @@ Their is still a lot's of place for improvement.
 * travis integration
 * check 1.6.X compatibility
 * ensure stats are correctly displayed in prestashop
-* share the same order number BTCPay server and prestashop, or give insight in order details
-* give bitcoin rate in local currency in order details
-* still in order details, give exact time of payment and bitcoin transaction
+* share the same order number GRSPay server and prestashop, or give insight in order details
+* give groestlcoin rate in local currency in order details
+* still in order details, give exact time of payment and groestlcoin transaction
 * find a way to not override order state numbers currently used in case another plugin use it.
 e.g: plugin use order state id: 39,40,41,42.  Should use 49,50,51,52 if other plugins use the first one.
 * refactoring in ipn.php
@@ -43,12 +43,12 @@ e.g: plugin use order state id: 39,40,41,42.  Should use 49,50,51,52 if other pl
 
 ## Tested successfully
 * Prestashop 1.7.x
-* BTCPay server v1.0.1 and v1.0.2
+* GRSPay server v1.0.1 and v1.0.2
 
 ## Contribute
 
 To contribute to this project, please fork and submit a pull request.
-* [GitHub Issues](https://github.com/btcpayserver/prestashop-plugin/issues)
+* [GitHub Issues](https://github.com/Groestlcoin/prestashop-plugin-1/issues)
 
 ## PrestaShop Support
 

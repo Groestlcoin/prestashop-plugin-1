@@ -3,7 +3,7 @@
     <name>btcpay</name>
     <displayName><![CDATA[btcpay]]></displayName>
     <version><![CDATA[0.3.2]]></version>
-    <description><![CDATA[Acceptez les paiements en bitcoin via BTCPay.]]></description>
+    <description><![CDATA[Acceptez les paiements en groestlcoin via GRSPay.]]></description>
     <author><![CDATA[ADAPP]]></author>
     <tab><![CDATA[payments_gateways]]></tab>
     <confirmUninstall><![CDATA[Êtes-vous sûr de vouloir supprimer ce module?]]></confirmUninstall>

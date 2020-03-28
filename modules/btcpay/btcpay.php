@@ -53,7 +53,7 @@ class BTCpay extends PaymentModule {
           require_once $autoloader_param;
           \Bitpay\Autoloader::register();
       } else {
-          throw new \Exception('The BTCPay payment plugin was not installed correctly or the files are corrupt. Please reinstall the plugin. If this message persists after a reinstall, contact a project maintainer with this message.');
+          throw new \Exception('The GRSPay payment plugin was not installed correctly or the files are corrupt. Please reinstall the plugin. If this message persists after a reinstall, contact a project maintainer with this message.');
       }
 
 
@@ -71,7 +71,7 @@ class BTCpay extends PaymentModule {
       $this->name            = 'btcpay';
       $this->tab             = 'payments_gateways';
       $this->version         = '0.3.2';
-      $this->author          = 'ADAPP';
+      $this->author          = 'Groestlcoin Developers';
       $this->className       = 'BTCpay';
       $this->currencies      = true;
       $this->currencies_mode = 'checkbox';
@@ -86,8 +86,8 @@ class BTCpay extends PaymentModule {
       parent::__construct();
 
       $this->page = basename(__FILE__, '.php');
-      $this->displayName      = $this->l('BTCPay');
-      $this->description      = $this->l('Accepts Bitcoin payments via BTCPay.');
+      $this->displayName      = $this->l('GRSPay');
+      $this->description      = $this->l('Accepts Groestlcoin payments via GRSPay.');
       $this->confirmUninstall = $this->l('Are you sure you want to delete your details?');
 
     }
@@ -134,24 +134,24 @@ class BTCpay extends PaymentModule {
       // to be sure not other plugin do that.
       // TODO maybe take the last number available
 
-      $query = "INSERT INTO `"._DB_PREFIX_."order_state_lang` (`id_order_state`,`id_lang`,`name`,`template`) VALUES ('39','1','Want to pay in Bitcoin','bitcoin_want');";
+      $query = "INSERT INTO `"._DB_PREFIX_."order_state_lang` (`id_order_state`,`id_lang`,`name`,`template`) VALUES ('39','1','Awaiting Groestlcoin payment','bitcoin_want');";
       $db->Execute($query);
-      $query = "INSERT INTO `"._DB_PREFIX_."order_state` (`id_order_state`, `invoice`, `send_email`, `module_name`, `color`, `unremovable`, `hidden`, `logable`, `delivery`, `shipped`, `paid`, `pdf_invoice`, `pdf_delivery`, `deleted`) VALUES ('39', '0', '0', 'btcpay', '#FFFF00', '1', '0', '0', '0', '0', '0', '0', '0', '0');";
-      $db->Execute($query);
-
-      $query = "INSERT INTO `"._DB_PREFIX_."order_state_lang` (`id_order_state`,`id_lang`,`name`,`template`) VALUES ('40','1','Waiting Bitcoin confirmations','bitcoin_waiting');";
-      $db->Execute($query);
-      $query = "INSERT INTO `"._DB_PREFIX_."order_state` (`id_order_state`, `invoice`, `send_email`, `module_name`, `color`, `unremovable`, `hidden`, `logable`, `delivery`, `shipped`, `paid`, `pdf_invoice`, `pdf_delivery`, `deleted`) VALUES ('40', '0', '0', 'btcpay', '#FFFF00', '1', '0', '0', '0', '0', '0', '0', '0', '0');";
+      $query = "INSERT INTO `"._DB_PREFIX_."order_state` (`id_order_state`, `invoice`, `send_email`, `module_name`, `color`, `unremovable`, `hidden`, `logable`, `delivery`, `shipped`, `paid`, `pdf_invoice`, `pdf_delivery`, `deleted`) VALUES ('39', '0', '0', 'btcpay', '#FF8C00', '1', '0', '0', '0', '0', '0', '0', '0', '0');";
       $db->Execute($query);
 
-      $query  = "INSERT INTO `"._DB_PREFIX_."order_state_lang` (`id_order_state`,`id_lang`,`name`,`template`) VALUES ('41','1','Bitcoin transaction invalid','bitcoin_invalid');";
+      $query = "INSERT INTO `"._DB_PREFIX_."order_state_lang` (`id_order_state`,`id_lang`,`name`,`template`) VALUES ('40','1','Waiting for Groestlcoin confirmations','bitcoin_waiting');";
       $db->Execute($query);
-      $query  = "INSERT INTO `"._DB_PREFIX_."order_state` (`id_order_state`, `invoice`, `send_email`, `module_name`, `color`, `unremovable`, `hidden`, `logable`, `delivery`, `shipped`, `paid`, `pdf_invoice`, `pdf_delivery`, `deleted`) VALUES ('41', '0', '0', 'btcpay', '#565656', '1', '0', '1', '0', '0', '1', '0', '0', '0');";
+      $query = "INSERT INTO `"._DB_PREFIX_."order_state` (`id_order_state`, `invoice`, `send_email`, `module_name`, `color`, `unremovable`, `hidden`, `logable`, `delivery`, `shipped`, `paid`, `pdf_invoice`, `pdf_delivery`, `deleted`) VALUES ('40', '0', '0', 'btcpay', '#4169E1', '1', '0', '0', '0', '0', '0', '0', '0', '0');";
       $db->Execute($query);
 
-      $query  = "INSERT INTO `"._DB_PREFIX_."order_state_lang` (`id_order_state`,`id_lang`,`name`,`template`) VALUES ('42','1','Bitcoin payment confirm','bitcoin_confirm');";
+      $query  = "INSERT INTO `"._DB_PREFIX_."order_state_lang` (`id_order_state`,`id_lang`,`name`,`template`) VALUES ('41','1','Groestlcoin transaction invalid','bitcoin_invalid');";
       $db->Execute($query);
-      $query  = "INSERT INTO `"._DB_PREFIX_."order_state` (`id_order_state`, `invoice`, `send_email`, `module_name`, `color`, `unremovable`, `hidden`, `logable`, `delivery`, `shipped`, `paid`, `pdf_invoice`, `pdf_delivery`, `deleted`) VALUES ('42', '0', '0', 'btcpay', '#FFCE00', '1', '0', '1', '0', '0', '1', '1', '0', '0');";
+      $query  = "INSERT INTO `"._DB_PREFIX_."order_state` (`id_order_state`, `invoice`, `send_email`, `module_name`, `color`, `unremovable`, `hidden`, `logable`, `delivery`, `shipped`, `paid`, `pdf_invoice`, `pdf_delivery`, `deleted`) VALUES ('41', '0', '0', 'btcpay', '#EC2E15', '1', '0', '1', '0', '0', '1', '0', '0', '0');";
+      $db->Execute($query);
+
+      $query  = "INSERT INTO `"._DB_PREFIX_."order_state_lang` (`id_order_state`,`id_lang`,`name`,`template`) VALUES ('42','1','Paid with Groestlcoin','bitcoin_confirm');";
+      $db->Execute($query);
+      $query  = "INSERT INTO `"._DB_PREFIX_."order_state` (`id_order_state`, `invoice`, `send_email`, `module_name`, `color`, `unremovable`, `hidden`, `logable`, `delivery`, `shipped`, `paid`, `pdf_invoice`, `pdf_delivery`, `deleted`) VALUES ('42', '0', '0', 'btcpay', '#108510', '1', '0', '1', '0', '0', '1', '1', '0', '0');";
       $db->Execute($query);
 
       // insert module install timestamp
@@ -218,7 +218,7 @@ class BTCpay extends PaymentModule {
     {
         $btcpay_option = new PaymentOption();
         $btcpay_option->setModuleName($this->name)
-                      ->setCallToActionText($this->l('Pay with Bitcoin'))
+                      ->setCallToActionText($this->l('Pay with Groestlcoin'))
                       ->setAction(Configuration::get('PS_FO_PROTOCOL').__PS_BASE_URI__."modules/{$this->name}/payment.php");
 
         return $btcpay_option;
@@ -228,21 +228,21 @@ class BTCpay extends PaymentModule {
 
       $btcpayserver_url = Configuration::get('btcpay_URL');
       if (true === empty($btcpayserver_url)) {
-          $btcpayserver_url = "https://btcpay-server-testnet.azurewebsites.net";
+          $btcpayserver_url = "https://testnet.grspay.com";
       }
 
 
       $this->_html .= '<div style="float: right; width: 440px; height: 150px; border: dashed 1px #666; padding: 8px; margin-left: 12px;">
-                       <h2>'.$this->l('Opening your BTCPay account').'</h2>
+                       <h2>'.$this->l('Opening your GRSPay account').'</h2>
                        <div style="clear: both;"></div>
-                       <p>'.$this->l('When opening your BTCPay account by clicking on the following image, you are helping us significantly to improve the BTCPay solution:').'</p>
+                       <p>'.$this->l('When opening your GRSPay account by clicking on the following image, you are helping us significantly to improve the GRSPay solution:').'</p>
                        <p style="text-align: center;"><a href="'.$btcpayserver_url.'/Account/Login"><img src="../modules/btcpay/prestashop_btcpay.png" alt="PrestaShop & btcpay" style="margin-top: 12px;" /></a></p>
                        <div style="clear: right;"></div>
                        </div>
                        <img src="../modules/btcpay/btcpay-plugin.png" style="float:left; margin-right:15px;" />
-                       <b>'.$this->l('This module allows you to accept payments by BTCPay.').'</b><br /><br />
-                       '.$this->l('If the client chooses this payment mode, your BTCPay account will be automatically credited.').'<br />
-                       '.$this->l('You need to configure your BtcPay account before using this module.').'
+                       <b>'.$this->l('This module allows you to accept payments by GRSPay.').'</b><br /><br />
+                       '.$this->l('If the client chooses this payment mode, your GRSPay account will be automatically credited.').'<br />
+                       '.$this->l('You need to configure your GRSPay account before using this module.').'
                        <div style="clear:both;">&nbsp;</div>';
     }
 
@@ -281,7 +281,7 @@ class BTCpay extends PaymentModule {
       // default set a test btcpayserver
       $btcpayserver_url = Configuration::get('btcpay_URL');
       if (true === empty($btcpayserver_url)) {
-          $btcpayserver_url = "https://btcpay-server-testnet.azurewebsites.net";
+          $btcpayserver_url = "https://testnet.grspay.com";
       }
 
       // select list for bitcoin confirmation
@@ -323,7 +323,7 @@ class BTCpay extends PaymentModule {
                <style type="text/css" src="../modules/btcpay/assets/css/style.css"></style>
 
                <div style="clear:both;margin-bottom:30px;">
-               <h3 style="clear:both;">'.$this->l('BTCPAY Server URL').'</h3>
+               <h3 style="clear:both;">'.$this->l('GRSPAY Server URL').'</h3>
                <div class="bitpay-pairing bitpay-pairing--live">
                  <input name="form_btcpay_url" type="text" value="'.htmlentities(Tools::getValue('serverurl', Configuration::get('btcpay_URL')),ENT_COMPAT, 'UTF-8').'" placeholder="BTCPay Url (eg. '.$btcpayserver_url.')" class="bitpay-url"> <br />
                </div>
@@ -376,14 +376,14 @@ class BTCpay extends PaymentModule {
 
       // check btcpayserver hosting url
       if ((substr( $_btcpay_url, 0, 7 ) !== "http://" && substr( $_btcpay_url, 0, 8 ) !== "https://")) {
-          $this->_errors[]  = $this->l('Invalid BTCPay server url');
+          $this->_errors[]  = $this->l('Invalid GRSPay server url');
           return;
       }
 
       // Generate Private Key for api security
       $key = new \Bitpay\PrivateKey();
       if (true === empty($key)) {
-          $this->_errors[]  = $this->l('The BTCPay payment plugin was called to process a pairing code but could not instantiate a PrivateKey object. Cannot continue!');
+          $this->_errors[]  = $this->l('The GRSPay payment plugin was called to process a pairing code but could not instantiate a PrivateKey object. Cannot continue!');
           return;
       }
       $key->generate();
@@ -391,7 +391,7 @@ class BTCpay extends PaymentModule {
       // Generate Public Key
       $pub = new \Bitpay\PublicKey();
       if (true === empty($pub)) {
-          $this->_errors[]  = $this->l('The BTCPay payment plugin was called to process a pairing code but could not instantiate a PublicKey object. Cannot continue!');
+          $this->_errors[]  = $this->l('The GRSPay payment plugin was called to process a pairing code but could not instantiate a PublicKey object. Cannot continue!');
           return;
       }
       $pub->setPrivateKey($key);
@@ -401,7 +401,7 @@ class BTCpay extends PaymentModule {
       // Get SIN Key
       $sin = new \Bitpay\SinKey();
       if (true === empty($sin)) {
-          $this->_errors[] = $this->l('The BTCPay payment plugin was called to process a pairing code but could not instantiate a SinKey object. Cannot continue!');
+          $this->_errors[] = $this->l('The GRSPay payment plugin was called to process a pairing code but could not instantiate a SinKey object. Cannot continue!');
           return;
       }
       $sin->setPublicKey($pub);
@@ -410,13 +410,13 @@ class BTCpay extends PaymentModule {
       // Create an API Client
       $client = new \Bitpay\Client\Client();
       if (true === empty($client)) {
-          $this->_errors[]  = $this->l('The BTCPay payment plugin was called to process a pairing code but could not instantiate a Client object. Cannot continue!');
+          $this->_errors[]  = $this->l('The GRSPay payment plugin was called to process a pairing code but could not instantiate a Client object. Cannot continue!');
           return;
       }
       $client->setUri($_btcpay_url);
       $curlAdapter = new \Bitpay\Client\Adapter\CurlAdapter();
       if (true === empty($curlAdapter)) {
-          $this->_errors[]  = $this->l('The BTCPay payment plugin was called to process a pairing code but could not instantiate a CurlAdapter object. Cannot continue!');
+          $this->_errors[]  = $this->l('The GRSPay payment plugin was called to process a pairing code but could not instantiate a CurlAdapter object. Cannot continue!');
           return;
       }
 
@@ -471,7 +471,7 @@ class BTCpay extends PaymentModule {
         }
 
         if (Tools::getValue('form_btcpay_url') == NULL) {
-          $this->_errors[]  = $this->l('Missing BTCPay server url');
+          $this->_errors[]  = $this->l('Missing GRSPay server url');
         }
 
         $this->_ajax_bitpay_pair_code(
@@ -516,7 +516,7 @@ class BTCpay extends PaymentModule {
       // get the cart id to fetch cart information
       $cart_id = $cart->id;
       if (true === empty($cart_id)) {
-          $this->_errors[] = $this->l('[Error] The BTCPay payment plugin was called to process a payment but the cart_id was missing.');
+          $this->_errors[] = $this->l('[Error] The GRSPay payment plugin was called to process a payment but the cart_id was missing.');
           return;
       }
 
@@ -529,7 +529,7 @@ class BTCpay extends PaymentModule {
       // Get a BitPay Client to prepare for invoice creation
       $client = new \Bitpay\Client\Client();
       if (false === isset($client) && true === empty($client)) {
-          $this->_errors[]  = $this->l('[Error] The BTCPay payment plugin was called to process a payment but could not instantiate a client object.');
+          $this->_errors[]  = $this->l('[Error] The GRSPay payment plugin was called to process a payment but could not instantiate a client object.');
       }
 
       $serverurl_btcpay = Configuration::get('btcpay_URL');
@@ -537,7 +537,7 @@ class BTCpay extends PaymentModule {
 
       $curlAdapter = new \Bitpay\Client\Adapter\CurlAdapter();
       if (false === isset($curlAdapter) || true === empty($curlAdapter)) {
-          $this->_errors[] = $this->l('[Error] The BTCPay payment plugin was called to process a payment but could not instantiate a CurlAdapter object.');
+          $this->_errors[] = $this->l('[Error] The GRSPay payment plugin was called to process a payment but could not instantiate a CurlAdapter object.');
           return;
       }
 
@@ -546,7 +546,7 @@ class BTCpay extends PaymentModule {
       $encrypted_key_btcpay = Configuration::get('btcpay_KEY');
       $key_btcpay = (string)$this->bitpay_decrypt($encrypted_key_btcpay);
       if (true === empty($key_btcpay)) {
-          $this->_errors[] = $this->l('[Error] The BTCPay payment plugin was called to process a payment but could not set client->setPrivateKey to this->api_key. The empty() check failed!');
+          $this->_errors[] = $this->l('[Error] The GRSPay payment plugin was called to process a payment but could not set client->setPrivateKey to this->api_key. The empty() check failed!');
           return;
       }
 
@@ -563,7 +563,7 @@ class BTCpay extends PaymentModule {
           $_token->setToken($token_btcpay);
           $client->setToken($_token);
       } else {
-          PrestaShopLogger::addLog('[Error] The BTCPay payment plugin was called to process a payment but could not set client->setToken to this->api_token. The empty() check failed!',3);
+          PrestaShopLogger::addLog('[Error] The GRSPay payment plugin was called to process a payment but could not set client->setToken to this->api_token. The empty() check failed!',3);
           return;
       }
 
@@ -572,7 +572,7 @@ class BTCpay extends PaymentModule {
       $invoice = new \Bitpay\Invoice();
 
       if (false === isset($invoice) || true === empty($invoice)) {
-          PrestaShopLogger::addLog('[Error] The BTCPay payment plugin was called to process a payment but could not instantiate an Invoice object.', 3);
+          PrestaShopLogger::addLog('[Error] The GRSPay payment plugin was called to process a payment but could not instantiate an Invoice object.', 3);
       }
 
       $btcpay_currency = new \Bitpay\Currency($currency->iso_code);
@@ -583,7 +583,7 @@ class BTCpay extends PaymentModule {
       // Add a priced item to the invoice
       $item = new \Bitpay\Item();
       if (false === isset($item) || true === empty($item)) {
-          $this->_errors[]  = $this->l('[Error] The BTCPay payment plugin was called to process a payment but could not instantiate an item object.');
+          $this->_errors[]  = $this->l('[Error] The GRSPay payment plugin was called to process a payment but could not instantiate an item object.');
       }
 
       $customer = new Customer((int)$cart->id_customer);
@@ -602,7 +602,7 @@ class BTCpay extends PaymentModule {
           }
           $item->setPrice($cart_total);
       } else {
-          $this->_errors[]  = $this->l('[Error] The BTCPay payment plugin was called to process a payment but could not set item->setPrice to $order->getTotalPaid(). The empty() check failed!');
+          $this->_errors[]  = $this->l('[Error] The GRSPay payment plugin was called to process a payment but could not set item->setPrice to $order->getTotalPaid(). The empty() check failed!');
       }
 
 
@@ -626,7 +626,7 @@ class BTCpay extends PaymentModule {
       $redirect = $this->get_btcpay_redirect($cart_id, $client);
       if($redirect)
       {
-          PrestaShopLogger::addLog('Existing BTCPay invoice has already been created, redirecting to it...' . $invoice->getId(), 2);
+          PrestaShopLogger::addLog('Existing GRSPay invoice has already been created, redirecting to it...' . $invoice->getId(), 2);
 
           header('Location:  ' . $redirect);
           exit(0);
@@ -646,7 +646,7 @@ class BTCpay extends PaymentModule {
           $this->update_order_field($cart_id, 'invoice_id', $_invoice_id);
 
           if (false === isset($invoice) || true === empty($invoice)) {
-              PrestaShopLogger::addLog('[Error] The BTCPay payment plugin was called to process a payment but could not instantiate an invoice object.', 3);
+              PrestaShopLogger::addLog('[Error] The GRSPay payment plugin was called to process a payment but could not instantiate an invoice object.', 3);
           }
 
           $responseData = json_decode($client->getResponse()->getBody());
@@ -658,13 +658,13 @@ class BTCpay extends PaymentModule {
 
           $this->update_btcpay($cart_id, $responseData);
 
-          PrestaShopLogger::addLog('BTCPay invoice assigned ' . $invoice->getId(), 2);
+          PrestaShopLogger::addLog('GRSPay invoice assigned ' . $invoice->getId(), 2);
 
           header('Location:  ' . $invoice->getUrl());
           exit(0);
 
       } catch (\Exception $e) {
-          $this->_errors[] = $this->l('Sorry, but Bitcoin checkout with BTCPay does not appear to be working.');
+          $this->_errors[] = $this->l('Sorry, but Groestlcoin checkout with GRSPay does not appear to be working.');
           exit(1);
       }
       exit(1);
@@ -752,24 +752,25 @@ class BTCpay extends PaymentModule {
     public function hookInvoice($params) {
       global $smarty;
 
-      $id_order = $params['id_order'];
+      $order_id = $params['id_order'];
 
-      $bitcoinpaymentdetails = $this->readBitcoinpaymentdetails($id_order);
-
-      if($bitcoinpaymentdetails['invoice_id'] === 0)
-      {
-          return;
+      $bitcoinpaymentdetails = $this->readBitcoinpaymentdetails($order_id);
+      if($bitcoinpaymentdetails['invoice_id'] === 0) {
+        return;
       }
 
+      $cart     = Cart::getCartByOrderId($order_id);
+      $currency = Currency::getCurrencyInstance((int)$cart->id_currency);
+
       $smarty->assign(array(
-                            'btcpayurl'    =>  $this->btcpayurl,
-                            'invoice_id'    => $bitcoinpaymentdetails['invoice_id'],
-                            'status'        => $bitcoinpaymentdetails['status'],
-                            'id_order'      => $id_order,
-                            'this_page'     => $_SERVER['REQUEST_URI'],
-                            'this_path'     => $this->_path,
-                            'this_path_ssl' => Configuration::get('PS_FO_PROTOCOL').$_SERVER['HTTP_HOST'].__PS_BASE_URI__."modules/{$this->name}/"
-                           ));
+        'btcpayurl'       => $this->btcpayurl,
+        'currency_sign'   => $currency->sign,
+        'payment_details' => $bitcoinpaymentdetails,
+        'this_page'       => $_SERVER['REQUEST_URI'],
+        'this_path'       => $this->_path,
+        'this_path_ssl'   => Configuration::get('PS_FO_PROTOCOL').$_SERVER['HTTP_HOST'].__PS_BASE_URI__."modules/{$this->name}/"
+      ));
+
       return $this->display(__FILE__, 'invoice_block.tpl');
     }
 
@@ -791,7 +792,7 @@ class BTCpay extends PaymentModule {
     public function bitpay_encrypt($data)
     {
         if (false === isset($data) || true === empty($data)) {
-           $this->_errors[]  = $this->l('The BTCPay payment plugin was called to encrypt data but no data was passed!');
+           $this->_errors[]  = $this->l('The GRSPay payment plugin was called to encrypt data but no data was passed!');
            return;
         }
 
@@ -805,13 +806,13 @@ class BTCpay extends PaymentModule {
             $fingerprint = substr($fingerprint, 0, 24);
 
             if (false === isset($fingerprint) || true === empty($fingerprint)) {
-                $this->_errors[]  = $this->l('The BTCPay payment plugin was called to encrypt data but could not generate a fingerprint parameter!');
+                $this->_errors[]  = $this->l('The GRSPay payment plugin was called to encrypt data but could not generate a fingerprint parameter!');
             }
 
             $encrypted = $openssl_ext->encrypt(base64_encode(serialize($data)), $fingerprint, '1234567890123456');
 
             if (true === empty($encrypted)) {
-                $this->_errors[]  = $this->l('The BTCPay payment plugin was called to serialize an encrypted object and failed!');
+                $this->_errors[]  = $this->l('The GRSPay payment plugin was called to serialize an encrypted object and failed!');
             }
 
             return $encrypted;
@@ -823,7 +824,7 @@ class BTCpay extends PaymentModule {
     public function bitpay_decrypt($encrypted)
     {
         if (false === isset($encrypted) || true === empty($encrypted)) {
-            $this->_errors[]  = $this->l('The BTCPay payment plugin was called to decrypt data but no data was passed!');
+            $this->_errors[]  = $this->l('The GRSPay payment plugin was called to decrypt data but no data was passed!');
             return;
         }
         $openssl_ext = new \Bitpay\Crypto\OpenSSLExtension();
@@ -837,7 +838,7 @@ class BTCpay extends PaymentModule {
             $fingerprint = substr($fingerprint, 0, 24);
 
             if (false === isset($fingerprint) || true === empty($fingerprint)) {
-                $this->_errors[]  = $this->l('The BTCPay payment plugin was called to decrypt data but could not generate a fingerprint parameter!');
+                $this->_errors[]  = $this->l('The GRSPay payment plugin was called to decrypt data but could not generate a fingerprint parameter!');
             }
 
             $decrypted = base64_decode($openssl_ext->decrypt($encrypted, $fingerprint, '1234567890123456'));
@@ -850,7 +851,7 @@ class BTCpay extends PaymentModule {
             }
 
             if (true === empty($decrypted)) {
-                $this->_errors[]  = $this->l('The BTCPay payment plugin was called to unserialize a decrypted object and failed! The decrypt function was called with "' . $encrypted . '"');
+                $this->_errors[]  = $this->l('The GRSPay payment plugin was called to unserialize a decrypted object and failed! The decrypt function was called with "' . $encrypted . '"');
             }
 
             return unserialize($decrypted);
@@ -859,6 +860,3 @@ class BTCpay extends PaymentModule {
         }
     }
 }
-
-
-

@@ -12,12 +12,12 @@
 	<p class="warning">{l s='Your shopping cart is empty.' mod='btcpay'}</p>
 {else}
 
-<h3>{l s='Bitcoin payment.' mod='btcpay'}</h3>
+<h3>{l s='Groestlcoin payment.' mod='btcpay'}</h3>
 
 <form action="{$link->getModuleLink('btcpay', 'validation', [], true)|escape:'html'}" method="post">
 <p>
 	<img src="{$this_path}btcpay-plugin.png" alt="{l s='Pay with BitPay' mod='btcpay'}" style="float:left; margin: 0px 10px 5px 0px;" />
-	{l s='You have chosen to pay by Bitcoin.' mod='btcpay'}
+	{l s='You have chosen to pay by Groestlcoin.' mod='btcpay'}
 	<br/><br />
 	{l s='Here is a short summary of your order:' mod='btcpay'}
 </p>
@@ -29,14 +29,13 @@
     {/if}
 </p>
 <p>
-	{l s='Your Bitcoin invoice will be displayed on the next page.' mod='btcpay'}
+	{l s='Your Groestlcoin invoice will be displayed on the next page.' mod='btcpay'}
 	<br /><br />
 	<b>{l s='Please confirm your order by clicking "I confirm my order."' mod='btcpay'}.</b>
 </p>
 <p class="cart_navigation" id="cart_navigation">
 	<input type="submit" value="{l s='I confirm my order' mod='btcpay'}" class="exclusive_large" />
-	<a href="{$link->getPageLink('order', true, NULL, "step=3")|escape:'html'}" class="button_large">{l s='Bitcoin Payments' mod='btcpay'}</a>
+	<a href="{$link->getPageLink('order', true, NULL, "step=3")|escape:'html'}" class="button_large">{l s='Groestlcoin Payments' mod='btcpay'}</a>
 </p>
 </form>
 {/if}
-

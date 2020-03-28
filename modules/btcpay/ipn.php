@@ -31,6 +31,14 @@ include(dirname(__FILE__).'/btcpay.php');
 
 $btcpay = new BTCpay();
 
+// update missing kernel object
+global $kernel;
+if(!$kernel){
+        require_once _PS_ROOT_DIR_.'/app/AppKernel.php';
+        $kernel = new \AppKernel('prod', false);
+        $kernel->boot();
+}
+
 $post = file_get_contents('php://input');
 if (!$post) {
     PrestaShopLogger::addLog('[Error] bad input', 3);
@@ -393,9 +401,11 @@ if (true === array_key_exists('name', $event)
     exit;
 }
 
-if (true === array_key_exists('name', $event)
-    && $event['name'] === 'invoice_failedToConfirm'
-    or $event['name'] === 'invoice_markedInvalid' ) {
+if (true === array_key_exists('name', $event) && (
+    $event['name'] === 'invoice_failedToConfirm'
+    || $event['name'] === 'invoice_markedInvalid'
+    || $event['name'] === 'invoice_expired')
+) {
 
     if (true === empty($data)) {
         PrestaShopLogger::addLog('[Error] invalide json', 3);
@@ -641,7 +651,7 @@ if (true === array_key_exists('name', $event)
     if ( $order->current_state != $order_status) {
         $new_history = new OrderHistory();
         $new_history->id_order = (int)$order_id;
-        // bitcoin confirmation ok
+        // groestlcoin confirmation ok
         $new_history->changeIdOrderState((int)$order_status, (int)$order_id, true);
         $new_history->add(true);
     } else {
